@@ -15,6 +15,7 @@ const routes = [
     {
         path: '/index',  
         name: 'index',
+        url:'1',
         // 内部引用
         component: () => import('@/views/index')
     },

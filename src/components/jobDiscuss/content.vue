@@ -2,17 +2,19 @@
 	<div id="indexContent">
 		<div class="content">
 			<div class="list" v-for="(item, index) in listData" :key="index">
-				<el-avatar
-					:size="55"
+				<img
 					:src="item.avatar"
 					style="
+						width: 40px;
+						height: 40px;
+						border-radius: 50%;
 						display: inline-block;
 						position: absolute;
 						left: 0;
-						top: 20px;
+						top: 28px;
 						cursor: pointer;
 					"
-				></el-avatar>
+				/>
 				<p class="tit" @click="goDetail(item)">{{ item.articleTitle }}</p>
 				<p class="name" @click="goDetail(item)">{{ item.nickname }}</p>
 
@@ -49,7 +51,7 @@
 </template>
 <script>
 import { reactive, toRefs, onMounted } from "vue";
-import { useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 import { apigetJobData } from "@/request/content";
 import { apiGuanzhuList, apiGuanzhu, apiNoGuanzhu } from "@/request/guanzhu";
 export default {
@@ -57,20 +59,23 @@ export default {
 	setup() {
 		const router = useRouter();
 		const data = reactive({
-			circleUrl: require("@/assets/img1.webp"),
+			circleUrl: require("@/assets/avatar/avatar8.jpg"),
+			image: [
+			{}
+			],
 			id: "2",
 			display: true,
 			listData: [
-				// {
-				//   liIndex: "",
-				//   imgSrc: "",
-				//   tit: "",
-				//   name: "",
-				//   time: "",
-				//   huifu: "",
-				//   zan: "",
-				//   liulan: "",
-				// },
+				{
+					liIndex: "",
+					imgSrc: "",
+					tit: "",
+					name: "",
+					time: "",
+					huifu: "",
+					zan: "",
+					liulan: "",
+				},
 			],
 			followList: [],
 		});
