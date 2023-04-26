@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5",  //指定要使用的默认库
+    "module": "esnext", //生成模块时代码指定的模块系统
+    "baseUrl": "./",  //指定模块基础目录
+    "moduleResolution": "node",  //指定如何解析导入模块
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "javascript.validate.enable": false
+
+}
