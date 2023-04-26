@@ -160,6 +160,19 @@ export default {
 							// console.log(res);
 							if (res.status == 200) {
 								if (res.data.code == 0) {
+									const cookies = document.cookie;
+									const tokenIndex = cookies.indexOf("token=");
+									if (tokenIndex !== -1) {
+										const tokenStartIndex = tokenIndex + "token=".length;
+										const tokenEndIndex = cookies.indexOf(";", tokenStartIndex);
+										const token =
+											tokenEndIndex !== -1
+												? cookies.substring(tokenStartIndex, tokenEndIndex)
+												: cookies.substring(tokenStartIndex);
+										// 将token暂存到客户端
+
+										localStorage.setItem("token", token);
+									}
 									ElMessage({
 										message: "登录成功",
 										type: "success",

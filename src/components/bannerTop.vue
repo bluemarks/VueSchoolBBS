@@ -68,14 +68,8 @@
 							>登录</span
 						>
 					</div>
-					<!-- <div class="person" v-else-if="store" @click="goPersonal()">
-						<el-badge :value="0" class="item">
-							<p style="height: 30px; line-height: 30px">个人中心</p>
-						</el-badge>
-						<span @click="goReturn()">退出</span>
-					</div> -->
-					<div class="person" v-else @click="goPersonal()">
-						<el-badge :value="1" class="item">
+					<div class="person" v-else>
+						<el-badge :value="1" class="item" @click="goPersonal()">
 							<p style="height: 30px; line-height: 30px">个人中心</p>
 						</el-badge>
 						<span @click="goReturn()">退出</span>
@@ -87,15 +81,15 @@
 </template>
 
 <script>
-
 import { reactive, toRefs, onMounted } from "vue";
 
-//引入useStore
+
 import { useStore } from "vuex";
-//引入路由
+
 import { useRouter, useRoute } from "vue-router";
 import { apionEnterSearch } from "@/request/bannerTop";
-import { ElMessageBox } from "element-plus";
+import { ElMessageBox, ElMessage } from "element-plus";
+
 export default {
 	name: "BannerTop",
 	components: {},
@@ -135,11 +129,12 @@ export default {
 			},
 			goReturn() {
 				router.push({ name: "login" });
+				localStorage.removeItem("token");
 				localStorage.removeItem("user");
-				data.display = false;
+				ElMessage.success("退出成功");
+				this.display = true;
 			},
 			goPersonal() {
-				// console.log(111);
 				router.push({ name: "personal" });
 			},
 			goTlq() {
@@ -159,7 +154,6 @@ export default {
 			},
 			research() {
 				router.push({ name: "searchDetail" });
-				// console.log("search:" + data.inputSearch);
 			},
 			onEnterSearch() {
 				const inputSearch = data.inputSearch;
@@ -179,23 +173,15 @@ export default {
 					});
 			},
 		};
-		// console.log(router.currentRoute.value)
-		data.activeIndex = route.query.value;
-		// data.store = store.state.data.type.isRed; // 获取状态值
-		console.log("状态：", store.state.data.type);
-		// watch(store, (pre) => {
-		// 	// 回调函数形式
-		// 	console.log("红点变了");
-		// 	console.log("红点", pre);
-		// 	store.store = pre;
-		// });
+		data.activeIndex = route.query.value || "1";
+
+		data.store = store.state.data.type.isRed;
 		onMounted(() => {
 			var user = localStorage.getItem("user");
-			console.log("这是localstorage ",user)
 			if (user) {
 				data.display = false;
 			} else {
-				data.display = true;	
+				data.display = true;
 			}
 		});
 		return {

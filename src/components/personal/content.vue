@@ -185,7 +185,7 @@ export default {
 							// });
 							//_self.followList = res.data.data;
 							data.userObj = res.data.data;
-							localStorage.setItem("myuserId", res.data.data.userId);
+							// localStorage.setItem("myuserId", res.data.data.userId);
 						}
 					})
 					.catch((err) => {
